@@ -1,5 +1,6 @@
 {
   "itemGroup.verselsmultiverse": "Example Mod Tab",
+  "itemGroup.verselsmultiverse.hidden_items": "Hidden Items",
   "block.verselsmultiverse.example_block": "Example Block",
   "item.verselsmultiverse.example_item": "Example Item"
 }
