@@ -1,8 +1,11 @@
 package org.verselstudios.verselsmultiverse;
 
 import com.jcraft.jorbis.Block;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -25,9 +28,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import org.verselstudios.verselsmultiverse.blocks.BlackJackTable;
-import org.verselstudios.verselsmultiverse.registers.HiddenItemRegister;
-import org.verselstudios.verselsmultiverse.registers.ModBlocks;
-import org.verselstudios.verselsmultiverse.registers.ModItems;
+import org.verselstudios.verselsmultiverse.registers.*;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(VerselsMultiverse.MODID)
@@ -42,6 +43,11 @@ public class VerselsMultiverse {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "verselsmultiverse" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+    // Create a Deferred Register to hold BlockEntityTypes which will be registered under the "verselsmultiverse" namespace
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
+    // Create a Deferred Register to hold Menus which will be registered under the "verselsmultiverse" namespace
+    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
+
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
@@ -56,6 +62,14 @@ public class VerselsMultiverse {
         HiddenItemRegister.register(ITEMS, CREATIVE_MODE_TABS);
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
+
+        ModBlockEntityTypes.register(BLOCK_ENTITY_TYPES);
+        // Register block entity types with the mod event bus
+        BLOCK_ENTITY_TYPES.register(modEventBus);
+
+        ModMenus.register(MENUS);
+        // Register menus with the mod event bus
+        MENUS.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);

@@ -3,5 +3,6 @@
   "itemGroup.verselsmultiverse.hidden_items": "Hidden Items",
   "itemGroup.verselsmultiverse.functional_blocks": "Functional Blocks",
   "block.verselsmultiverse.black_jack_table": "Black Jack Table",
-  "item.verselsmultiverse.example_item": "Example Item"
+  "item.verselsmultiverse.example_item": "Example Item",
+  "blockEntity.verselsmultiverse.black_jack_table.default_title": "Black Jack Table"
 }

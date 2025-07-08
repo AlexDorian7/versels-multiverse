@@ -3,16 +3,28 @@ package org.verselstudios.verselsmultiverse.blocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.verselstudios.verselsmultiverse.blocks.entity.BlackJackTableBlockEntity;
+import org.verselstudios.verselsmultiverse.menu.BlackJackTableMenu;
 
 public class BlackJackTable extends HorizontalDirectionalBlock {
 
@@ -60,5 +72,21 @@ public class BlackJackTable extends HorizontalDirectionalBlock {
         } else {
             return Shapes.or(BASE_SHAPE, EAST_WEST_SHAPE);
         }
+    }
+
+    @Nullable
+    @Override
+    public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity == null || !(blockEntity instanceof BlackJackTableBlockEntity blackJackTableBlockEntity)) return null;
+        return new SimpleMenuProvider(blackJackTableBlockEntity::createMenu, Component.translatable("blockEntity.verselsmultiverse.black_jack_table.default_title"));
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.openMenu(state.getMenuProvider(level, pos));
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 }
