@@ -1,6 +1,7 @@
 {
   "itemGroup.verselsmultiverse": "Example Mod Tab",
   "itemGroup.verselsmultiverse.hidden_items": "Hidden Items",
-  "block.verselsmultiverse.example_block": "Example Block",
+  "itemGroup.verselsmultiverse.functional_blocks": "Functional Blocks",
+  "block.verselsmultiverse.black_jack_table": "Black Jack Table",
   "item.verselsmultiverse.example_item": "Example Item"
 }

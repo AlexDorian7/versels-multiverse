@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "verselsmultiverse:block/black_jack_table"
+    },
+    "facing=north": {
+      "model": "verselsmultiverse:block/black_jack_table",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "verselsmultiverse:block/black_jack_table",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "verselsmultiverse:block/black_jack_table",
+      "y": 90
+    }
+  }
+}
